@@ -110,12 +110,23 @@ public class Contacts {
 
     //// METHOD TO ADD A CONTACT TO THE TEXT FILE AND HASH MAP ///////
 
+    static String number;
     public static void addContacts() {
+
         System.out.println("Please enter a name for your new contact:");
         String name = userInput.getString();
-        System.out.println("Please enter your contacts number");
-        String number = userInput.getString();
-
+        if(map.containsKey(name)) {
+            System.out.println("This contact already exist would you like to overwrite it?(y/n)");
+            String answer = userInput.getString();
+            if (answer.equalsIgnoreCase("y")) {
+                System.out.println("Please enter your contacts number");
+                number = userInput.getString();
+                map.replace(name, number);
+                }
+        } else {
+            System.out.println("Please enter your contacts number");
+            number = userInput.getString();
+        }
         try {
             Files.writeString(pathToFile, String.format("%s:%s%n", name, number), StandardOpenOption.APPEND);
         } catch (IOException iox) {
