@@ -101,8 +101,9 @@ public class Contacts {
                 -------------------""");
         for (Map.Entry<String, String> entry :
                 mapFromFile.entrySet()) {
-            System.out.println(entry.getKey() + " | "
-                    + entry.getValue().replaceFirst("(\\d{3})(\\d{3})(\\d+)", "($1) $2-$3"));   //(123) 456-7890);
+//            System.out.println(entry.getKey() + " | "
+//                    + entry.getValue().replaceFirst("(\\d{3})(\\d{3})(\\d+)", "($1) $2-$3"));   //(123) 456-7890);
+            System.out.printf("%-11s| %-14s |%n",entry.getKey(), entry.getValue().replaceFirst("(\\d{3})(\\d{3})(\\d+)", "($1) $2-$3"));
         }
         System.out.println();
     }
@@ -126,11 +127,11 @@ public class Contacts {
         } else {
             System.out.println("Please enter your contacts number");
             number = userInput.getString();
-        }
         try {
             Files.writeString(pathToFile, String.format("%s:%s%n", name, number), StandardOpenOption.APPEND);
         } catch (IOException iox) {
             iox.printStackTrace();
+        }
         }
         print();
     }
